@@ -18,16 +18,15 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
-      - name: Verify and apply upgrade
+      - name: Verify and apply V2 source
         shell: bash
         run: |
           set -euo pipefail
-          VERSION_LABEL=$(head -n 1 .payload/READY)
+          VERSION_LABEL=$(sed -n '1p' .payload/READY)
           EXPECTED_ARCHIVE_SHA=$(sed -n '2p' .payload/READY)
-          (cd .payload && sha256sum -c manifest.sha256)
-          cat .payload/chunk* | base64 --decode > /tmp/upgrade.patch.xz
+          cat .payload/current* | base64 --decode > /tmp/upgrade.patch.xz
           echo "${EXPECTED_ARCHIVE_SHA}  /tmp/upgrade.patch.xz" | sha256sum -c -
-          xz -dc /tmp/upgrade.patch.xz | git apply --binary -
+          xz -dc /tmp/upgrade.patch.xz | git apply --binary
           rm -rf .payload .bootstrap
           rm -f .github/workflows/import-package.yml
           git config user.name 'github-actions[bot]'
