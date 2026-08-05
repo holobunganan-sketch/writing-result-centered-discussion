@@ -1,0 +1,37 @@
+name: Promote V2 Source Tree
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  promote:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'release/v2.0.0'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Resolve V2 source commit
+        id: resolve
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=$(gh api -H 'Accept: application/vnd.github+json' \
+            '/search/commits?q=repo:${{ github.repository }}+"Release+v2.0.0+source+tree"' \
+            --jq '.items[0].sha')
+          test -n "$target"
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+      - name: Promote release branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.sha != steps.resolve.outputs.target
+        shell: bash
+        run: |
+          gh api --method PATCH \
+            -H 'Accept: application/vnd.github+json' \
+            '/repos/${{ github.repository }}/git/refs/heads/release/v2.0.0' \
+            -f sha='${{ steps.resolve.outputs.target }}' \
+            -F force=true
