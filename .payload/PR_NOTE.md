@@ -1,0 +1,1 @@
+Temporary trigger file for the verified v2.0.0 release import. The release workflow removes the entire .payload directory after applying and validating the upgrade.
