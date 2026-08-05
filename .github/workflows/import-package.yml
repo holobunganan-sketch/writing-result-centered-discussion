@@ -1,21 +1,23 @@
 name: Apply packaged upgrade
 
 on:
-  push:
+  pull_request:
     paths:
       - '.payload/READY'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   apply:
-    if: github.actor != 'github-actions[bot]'
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
       - name: Verify and apply upgrade
         shell: bash
         run: |
@@ -32,4 +34,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m "Import ${VERSION_LABEL} source"
-          git push
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            git push origin HEAD:${{ github.head_ref }}
+          else
+            git push origin HEAD:${{ github.ref_name }}
+          fi
