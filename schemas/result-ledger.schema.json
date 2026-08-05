@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/writing-result-centered-discussion/result-ledger.schema.json",
+  "title": "Result Ledger",
+  "type": "object",
+  "required": ["study_title", "study_design", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "study_title": {"type": "string"},
+    "study_design": {"type": "string"},
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "priority", "finding", "source", "effect_direction", "effect_size",
+          "uncertainty", "analysis_status", "causal_ceiling", "discussion_questions", "importance"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^R[0-9]+$"},
+          "priority": {
+            "type": "string",
+            "enum": ["primary", "key-secondary", "secondary", "exploratory", "safety"]
+          },
+          "finding": {"type": "string", "minLength": 1},
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["file", "locator"],
+            "properties": {
+              "file": {"type": "string", "minLength": 1},
+              "locator": {"type": "string", "minLength": 1}
+            }
+          },
+          "effect_direction": {"type": "string", "minLength": 1},
+          "effect_size": {"type": "string", "minLength": 1},
+          "uncertainty": {"type": "string", "minLength": 1},
+          "analysis_status": {"type": "string", "minLength": 1},
+          "causal_ceiling": {"type": "string", "enum": ["causal", "associational", "descriptive"]},
+          "discussion_questions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "importance": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

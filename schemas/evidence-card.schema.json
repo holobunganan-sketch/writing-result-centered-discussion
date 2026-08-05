@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/writing-result-centered-discussion/evidence-card.schema.json",
+  "title": "Evidence Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "citation_key", "rendered_citation", "source_file", "locator", "population",
+    "design", "sample_size", "exposure_or_intervention", "outcome", "main_finding",
+    "effect_size", "limitations", "linked_results", "evidence_roles", "relevance_reason",
+    "usable_claims", "forbidden_inferences", "verified_full_text"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^REF-[0-9]{3,}$"},
+    "citation_key": {"type": "string", "minLength": 1},
+    "rendered_citation": {"type": "string"},
+    "source_file": {"type": "string", "minLength": 1},
+    "locator": {"type": "string", "minLength": 1},
+    "population": {"type": "string", "minLength": 1},
+    "design": {"type": "string", "minLength": 1},
+    "sample_size": {"type": "string", "minLength": 1},
+    "exposure_or_intervention": {"type": "string", "minLength": 1},
+    "outcome": {"type": "string", "minLength": 1},
+    "main_finding": {"type": "string", "minLength": 1},
+    "effect_size": {"type": "string", "minLength": 1},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "linked_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "pattern": "^R[0-9]+$"},
+      "uniqueItems": true
+    },
+    "evidence_roles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "benchmark", "support", "contrast", "difference-explanation", "mechanism",
+          "methodology", "implication", "boundary", "limitation"
+        ]
+      }
+    },
+    "relevance_reason": {"type": "string", "minLength": 1},
+    "usable_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "locator"],
+        "properties": {
+          "claim": {"type": "string", "minLength": 1},
+          "locator": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "forbidden_inferences": {"type": "array", "items": {"type": "string"}},
+    "verified_full_text": {"const": true}
+  }
+}

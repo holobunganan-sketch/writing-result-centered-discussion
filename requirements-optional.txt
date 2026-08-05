@@ -1,0 +1,2 @@
+# Optional. The Skill also works with a system pdftotext executable.
+pypdf>=5.0

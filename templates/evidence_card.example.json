@@ -1,0 +1,40 @@
+{
+  "id": "REF-001",
+  "citation_key": "Support2024",
+  "rendered_citation": "(Support et al., 2024)",
+  "source_file": "references/supporting.txt",
+  "locator": "document, sentence 2",
+  "population": "Adults receiving post-exposure prophylaxis",
+  "design": "Multicentre prospective study",
+  "sample_size": "842",
+  "exposure_or_intervention": "Structured counselling addressing the early protection gap",
+  "outcome": "Treatment uptake",
+  "main_finding": "Structured counselling improved uptake, with a larger effect when the early protection gap was addressed.",
+  "effect_size": "not reported in fixture",
+  "limitations": [
+    "Non-random allocation"
+  ],
+  "linked_results": [
+    "R1"
+  ],
+  "evidence_roles": [
+    "support",
+    "difference-explanation"
+  ],
+  "relevance_reason": "It directly compares the same intervention mechanism and outcome as R1.",
+  "usable_claims": [
+    {
+      "claim": "Prior prospective evidence links structured counselling with higher treatment uptake.",
+      "locator": "document, sentence 2"
+    },
+    {
+      "claim": "Explicitly addressing the early protection gap may strengthen the counselling effect.",
+      "locator": "document, sentence 3"
+    }
+  ],
+  "forbidden_inferences": [
+    "The study proves that counselling caused higher uptake.",
+    "The reported effect applies to every clinical setting."
+  ],
+  "verified_full_text": true
+}

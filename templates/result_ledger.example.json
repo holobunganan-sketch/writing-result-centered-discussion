@@ -1,0 +1,26 @@
+{
+  "study_title": "Example study",
+  "study_design": "Multicentre observational study",
+  "results": [
+    {
+      "id": "R1",
+      "priority": "primary",
+      "finding": "Structured counselling was associated with higher treatment uptake at 12 weeks.",
+      "source": {
+        "file": "results.md",
+        "locator": "R1"
+      },
+      "effect_direction": "increase",
+      "effect_size": "54.7% versus 31.2%",
+      "uncertainty": "not reported in fixture",
+      "analysis_status": "prespecified",
+      "causal_ceiling": "associational",
+      "discussion_questions": [
+        "How does the magnitude compare with prior counselling studies?",
+        "Which intervention and population differences may explain heterogeneity?",
+        "What practical implication follows from addressing the early protection gap?"
+      ],
+      "importance": "high"
+    }
+  ]
+}

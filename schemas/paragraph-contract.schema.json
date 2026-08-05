@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/writing-result-centered-discussion/paragraph-contract.schema.json",
+  "title": "Paragraph Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "linked_results", "discussion_question", "central_claim", "claim_strength",
+    "argument_steps", "allowed_references", "closing_message", "status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^D[0-9]+$"},
+    "linked_results": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^R[0-9]+$"}
+    },
+    "discussion_question": {"type": "string", "minLength": 1},
+    "central_claim": {"type": "string", "minLength": 1},
+    "claim_strength": {"type": "string", "minLength": 1},
+    "argument_steps": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "type", "content", "references"],
+        "properties": {
+          "order": {"type": "integer", "minimum": 1},
+          "type": {"type": "string", "minLength": 1},
+          "content": {"type": "string", "minLength": 1},
+          "references": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^REF-[0-9]{3,}$"}
+          }
+        }
+      }
+    },
+    "allowed_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^REF-[0-9]{3,}$"}
+    },
+    "closing_message": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["draft", "approved"]}
+  }
+}
