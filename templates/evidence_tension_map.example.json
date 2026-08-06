@@ -1,0 +1,5 @@
+{
+  "results": [
+    {"result_id": "R1", "supporting_claims": ["REF-001-C1"], "contrasting_claims": [], "partially_consistent_claims": [], "noncomparable_claims": [], "difference_dimensions": [], "best_supported_interpretation": "Comparable observational evidence supports the direction of association.", "unresolved_questions": ["Causal effect remains untested."]}
+  ]
+}

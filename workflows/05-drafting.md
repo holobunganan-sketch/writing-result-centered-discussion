@@ -1,32 +1,19 @@
-# 05 受约束起草
+# 05 Drafting
 
-## 起草单位
+Draft one approved contract at a time.
 
-一次只写一个已批准的段落契约。完成后对照契约逐步检查，再进入下一段。
+```markdown
+<!-- D:D1 R:R1 -->
+Study result → direct comparison [REF-001-C1] → explanation or boundary [REF-003-C2] → interpretation of the current result.
+```
 
-## 段落结构
+Rules:
 
-1. 使用 trace header 绑定契约和结果。
-2. 首部陈述本研究发现及本段需要解决的解释问题。
-3. 引入最直接的既往证据并完成比较。
-4. 明确一致或差异的具体维度。
-5. 使用必要文献解释该一致或差异。
-6. 说明证据边界和可支持的解释强度。
-7. 以本研究的意义或适用范围收束。
+- Open with the study finding or the specific interpretive problem.
+- Use only claims listed in the contract.
+- State the relationship among sources: agreement, conflict, partial agreement, difference explanation, mechanism, implication, or boundary.
+- Include only the source details needed for the current inferential step.
+- Close by returning to the current study.
+- Preserve the result's causal ceiling.
 
-## 引用写法
-
-每次引用后需要立即呈现其功能：
-
-- 数据参照；
-- 支持当前解释；
-- 提供相反结果；
-- 解释差异；
-- 限定外推；
-- 支持临床或研究含义。
-
-连续介绍作者、年份、样本和结论会造成信息堆叠。只保留推进当前判断所需的信息。
-
-## 禁止临场扩展
-
-起草阶段不得新增未进入契约的文献、机制、结果、亚组、指南建议或宏大意义。发现确有必要的新证据时，返回证据卡和契约阶段，更新后重新验证。
+Run `semantic-audit-init` after the traceable draft is complete.

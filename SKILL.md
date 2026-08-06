@@ -1,81 +1,82 @@
 ---
 name: writing-result-centered-discussion
-description: Use when drafting, revising, or auditing a scientific manuscript Discussion from project-local results and reference files, especially when citations drift from the study result, paragraphs become unrelated information lists, or the argument lacks a clear main line.
+description: Use when drafting, revising, or auditing a scientific manuscript Discussion from project-local results and literature, especially when references drift from the study findings, paragraphs become unrelated information lists, evidence is weakly traceable, or the argument lacks a clear main line.
 ---
 
 # Writing Result-Centered Discussion
 
-## Core Principle
+## Core rule
 
-Discussion follows the study results. Every paragraph makes one interpretable claim about one or more identified results. Every reference performs a declared argumentative function and advances that claim.
+Discussion starts from the study results. Each paragraph advances one declared interpretation of identified results. Each external claim has a precise source location, verified excerpt, explicit argumentative role, comparability assessment, and claim-level citation ID.
 
-## Mandatory Workflow
+Set `SKILL_DIR` to this Skill directory and `PROJECT` to the manuscript project.
 
-Use the directory containing this `SKILL.md` as `SKILL_DIR`. Use the manuscript project as `PROJECT`.
+## Mandatory sequence
 
-1. Initialize and index before interpreting references.
+1. Initialize and index.
 
 ```bash
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" init
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" index
 ```
 
-Read `.discussion-workspace/project_inventory.json`. Stop when a required source is unreadable. Report the file and extraction reason.
+Inspect `project_inventory.json`. Classify files as `study-evidence`, `external-evidence`, `context-only`, or excluded. Resolve unreadable sources. External searches may use only `external-evidence`.
 
-2. Build `.discussion-workspace/result_ledger.json` from the study's Results, tables, figures, protocol, and analysis files. Read `workflows/02-result-ledger.md`. Record the result source and locator, effect size, uncertainty, analysis status, causal ceiling, importance, and discussion questions.
+2. Build `result_ledger.json` from Results, tables, figures, protocol, and analysis outputs. Record a verified study-file locator, effect size, uncertainty, analysis status, discussion questions, importance, and causal ceiling. Complete `study_profile` for comparability reranking.
 
-3. Retrieve candidate literature separately for each important result.
+3. Retrieve literature separately for each result.
 
 ```bash
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" search-result --result-id R1
 ```
 
-Read `workflows/03-evidence-selection.md`. Search results identify candidates only. Open and verify the full local source before creating an evidence card. Record a precise locator and one or more usable claims. Assign roles from `references/citation-roles.md`.
+Candidates require full-text review. Create evidence cards with claim IDs such as `REF-001-C1`. Each claim must include its linked result, role, statement, exact locator, verbatim supporting excerpt, forbidden inferences, evidence strength, and comparability assessment. Run `seal-card` after entering the excerpt.
 
-4. Build the global main line and paragraph contracts. Read `workflows/04-argument-design.md`. Each contract must contain one central claim, an ordered argument sequence, an explicit reference allowance, and a closing message that returns to the study result.
+4. Complete `comparability_matrix.json` and `evidence_tension_map.json`. State which claims support, contrast with, partially align with, or cannot be compared with each study result. Record unresolved questions.
 
-5. Run the structural gate.
+5. Build `argument_map.json` and approved paragraph contracts. A contract contains one central claim, one discussion question, ordered argument steps, a claim-level allowance list, and a closing message that returns to the study result.
+
+6. Run structural validation.
 
 ```bash
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" validate
 ```
 
-Do not draft while validation has errors. Resolve every error. Review every warning and record the decision.
+Drafting is blocked while errors remain.
 
-6. Draft only from approved contracts. Read `workflows/05-drafting.md`. Start each body paragraph with a trace header:
+7. Draft from approved contracts. Start each paragraph with:
 
 ```markdown
 <!-- D:D1 R:R1 -->
 ```
 
-Use `[REF-001]` markers only for references allowed by that contract. Do not introduce a new result, reference, mechanism, or implication during drafting.
+Cite claim IDs, for example `[REF-001-C1]`. Do not introduce claims outside the contract.
 
-7. Audit, revise, and repeat.
+8. Generate the semantic-audit task.
+
+```bash
+python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" semantic-audit-init
+```
+
+Read `semantic_audit/tasks.json`. Review every paragraph and complete `semantic_audit_report.json`. Confirm one central claim, result focus, sentence functions, claim support, citation deletion consequences, topic stability, evidence-strength limits, and return to the study.
+
+9. Audit and compile.
 
 ```bash
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" audit
-```
-
-Read `workflows/06-audit-revision.md`. Resolve all errors. Review warnings for citation density, unused evidence, contract coverage, and paragraph scope. Apply the deletion test: remove a reference when its removal does not weaken or change the argument.
-
-8. Compile the clean manuscript text after the audit passes.
-
-```bash
 python "$SKILL_DIR/scripts/discussion.py" --project "$PROJECT" compile --citation-mode key
 ```
 
-The output is `.discussion-workspace/discussion_final.md`.
+`compile` reruns index freshness, Schema validation, source verification, causal audit, citation authorization, semantic audit, and journal constraints. It refuses output on any error. The final text is `discussion_final.md`.
 
-## Hard Gates
+## Non-negotiable gates
 
-- No Discussion prose before the result ledger, evidence cards, argument map, and approved paragraph contracts exist.
-- No reference may enter a paragraph without a result link, role, relevance reason, precise source locator, and usable claim.
-- No citation may appear outside the paragraph contract's `allowed_references`.
-- No causal wording may exceed the result's `causal_ceiling` or the evidence design.
-- No paragraph may end as a study list. Its final movement must state what the comparison, explanation, or limitation adds to interpretation of the current study.
-- No full-text verification means no citation.
-- No clean final file while validation or audit reports contain errors.
+- A source mutation invalidates its evidence claims until reindexed and resealed.
+- An external search never falls back to Results, protocol, manuscript, or notes.
+- A reference is authorized at claim level. A correct paper cannot support an undeclared claim.
+- Citation count is not a quality target. Delete a citation when its removal causes no loss in the argument.
+- Observational or descriptive results cannot use causal language.
+- A paragraph that cannot be summarized in one clear sentence requires revision.
+- Final compilation cannot use old validation or audit reports.
 
-## Output Order
-
-When the user asks for a plan, provide the result ledger summary, main line, evidence matrix, and paragraph contracts before prose. When the user asks for a draft, preserve the traceable workspace and provide the compiled Discussion after gates pass.
+Read the matching file in `workflows/` before each stage. Use `migrate-v1` for old workspaces and `revision-intake` for an existing Discussion draft.

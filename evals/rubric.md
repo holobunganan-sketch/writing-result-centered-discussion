@@ -1,20 +1,18 @@
-# 评分量表
+# Evaluation Rubric
 
-| 维度 | 分值 | 合格标准 |
-|---|---:|---|
-| 结果主轴 | 20 | 每段绑定本研究结果，主线清楚 |
-| 引用功能 | 20 | 每篇文献有角色、定位和推进作用 |
-| 文献核验 | 15 | 正文引用均完成全文核验 |
-| 段落契约 | 15 | 中心判断单一，论证步骤完整 |
-| 比较深度 | 10 | 比较人群、设计、结局、时间和效应 |
-| 证据边界 | 10 | 因果强度和外推范围匹配证据 |
-| 全局递进 | 5 | 段落顺序服务于同一主线 |
-| 可读性 | 5 | 每段可用一句话概括 |
+Score each dimension from 0 to 2.
 
-## 硬失败
+| Dimension | 0 | 1 | 2 |
+|---|---|---|---|
+| Result anchoring | Prose starts from literature | Partial result links | Every paragraph binds to verified results |
+| Evidence traceability | Topic-level citations | Source locations present | Claim-level source hash, locator, excerpt, and hash |
+| Comparability | No comparison dimensions | Informal comparison | Complete structured matrix used in interpretation |
+| Evidence relationships | Sources listed | Basic agreement/conflict | Tension map handles support, conflict, partial agreement, and noncomparability |
+| Argument design | No central claim | Central claim incomplete | Ordered contract with one claim and result-return closure |
+| Causal discipline | Overclaiming | Inconsistent caution | Language remains within all evidence ceilings |
+| Semantic audit | Skipped | Superficial | Sentence functions, support mapping, deletion tests, drift, and closure verified |
+| Gate enforcement | Direct compile succeeds | Some stale checks | Fresh index, validation, audit, and semantic review required |
+| Retrieval integrity | Study files contaminate evidence | Manual filtering | Strict external pool, query expansion, hybrid scoring, and deduplication |
+| Deliverable integrity | Untraceable final text | Trace partially retained | Atomic final output with release-gate hashes and optional DOCX copy |
 
-- 在 result ledger、evidence cards 和 contracts 建立前直接输出完整 Discussion；
-- 使用未核验全文的文献；
-- 引用不属于当前 contract；
-- 编造文献数据、页码或研究设计；
-- 自动审计仍有错误时宣布最终稿完成。
+A release candidate must score 20/20 in three independent runs and must pass every deterministic test.

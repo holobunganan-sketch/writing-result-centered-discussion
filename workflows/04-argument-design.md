@@ -1,35 +1,23 @@
-# 04 主线与段落论证契约
+# 04 Argument Design
 
-## 全局主线
+## Evidence relationship
 
-`argument_map.json` 用一句话说明整篇 Discussion 的推进方向，并列出段落顺序。段落顺序优先遵循研究重要性和解释依赖：
+Complete `comparability_matrix.json` for support, benchmark, contrast, and difference-explanation claims. Complete `evidence_tension_map.json` for every primary and key secondary result.
 
-1. 主要发现及核心解释；
-2. 关键次要发现及其对主要发现的补充；
-3. 异质性、亚组或意外发现；
-4. 临床或研究意义；
-5. 优势与局限；
-6. 总结性判断。
+## Global line
 
-研究结构允许时可以调整。段落之间必须存在明确的承接理由。
+Write one sentence stating how the Discussion moves from the main result through comparison, explanation, boundaries, and implications.
 
-## 段落契约
+## Paragraph contract
 
-每个主体段落建立一个 `D#.json`：
+Each contract contains:
 
-- `linked_results`：本段绑定的结果；
-- `discussion_question`：本段回答的问题；
-- `central_claim`：读者读完后应得到的单一判断；
-- `claim_strength`：陈述强度；
-- `argument_steps`：按顺序列出结果、比较、解释、边界、意义和回归本研究；
-- `allowed_references`：本段唯一允许使用的文献；
-- `closing_message`：该段如何改变对本研究结果的理解；
-- `status`：完成审查后设为 `approved`。
+- one or more linked study results;
+- one discussion question;
+- one central claim;
+- a claim strength no higher than the linked result ceilings;
+- ordered steps that show how the paragraph moves;
+- `allowed_claims` at claim level;
+- a closing message that changes or limits the interpretation of the study result.
 
-## 合格标准
-
-- 中心判断可以用一句话表达。
-- 文献之间具有一致、对照、补充、解释、限定或递进关系。
-- 每一步都有必要性。
-- 段落结尾回到本研究。
-- 删除任何一个 argument step 都会造成可说明的逻辑缺口。
+A paper title, topic match, or broad conclusion cannot substitute for a claim unit.

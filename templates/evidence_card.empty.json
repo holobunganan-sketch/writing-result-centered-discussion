@@ -3,19 +3,7 @@
   "citation_key": "",
   "rendered_citation": "",
   "source_file": "",
-  "locator": "",
-  "population": "",
-  "design": "",
-  "sample_size": "",
-  "exposure_or_intervention": "",
-  "outcome": "",
-  "main_finding": "",
-  "effect_size": "not reported",
-  "limitations": [],
-  "linked_results": [],
-  "evidence_roles": [],
-  "relevance_reason": "",
-  "usable_claims": [],
-  "forbidden_inferences": [],
-  "verified_full_text": false
+  "source_hash": "",
+  "publication": {"title": "", "authors": [], "year": "", "doi": "", "pmid": "", "status": "other"},
+  "claims": []
 }

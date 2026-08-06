@@ -1,26 +1,8 @@
 {
-  "study_title": "Example study",
-  "study_design": "Multicentre observational study",
+  "study_title": "Counselling study",
+  "study_design": "Cross-sectional observational study",
+  "study_profile": {"population": "Adults receiving post-exposure prophylaxis", "exposure_or_intervention": "Structured counselling", "comparator": "Routine explanation", "outcomes": ["treatment uptake"], "setting": "Hospital clinics", "follow_up": "same visit"},
   "results": [
-    {
-      "id": "R1",
-      "priority": "primary",
-      "finding": "Structured counselling was associated with higher treatment uptake at 12 weeks.",
-      "source": {
-        "file": "results.md",
-        "locator": "R1"
-      },
-      "effect_direction": "increase",
-      "effect_size": "54.7% versus 31.2%",
-      "uncertainty": "not reported in fixture",
-      "analysis_status": "prespecified",
-      "causal_ceiling": "associational",
-      "discussion_questions": [
-        "How does the magnitude compare with prior counselling studies?",
-        "Which intervention and population differences may explain heterogeneity?",
-        "What practical implication follows from addressing the early protection gap?"
-      ],
-      "importance": "high"
-    }
+    {"id": "R1", "priority": "primary", "finding": "Structured counselling was associated with higher treatment uptake.", "source": {"file": "results/results.md", "locator": "document"}, "effect_direction": "increase", "effect_size": "54.7% versus 31.2%", "uncertainty": "95% CI not reported", "analysis_status": "prespecified", "causal_ceiling": "associational", "discussion_questions": ["How does this compare with prior studies?"], "importance": "high"}
   ]
 }

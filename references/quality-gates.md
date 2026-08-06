@@ -1,33 +1,12 @@
-# 质量门控
+# Quality Gates
 
-## Gate 1：结果可追溯
-
-每个主体论点绑定 Result Ledger 编号，且来源定位存在。
-
-## Gate 2：证据可追溯
-
-每个引用具有全文核验、精确定位、可用 claim、禁止推论和结果绑定。
-
-## Gate 3：引用有功能
-
-每个引用承担 benchmark、support、contrast、difference-explanation、mechanism、methodology、implication、boundary 或 limitation 中至少一项功能。
-
-## Gate 4：论证闭合
-
-每段具备研究结果、比较或解释、边界和回归本研究。段落中心可以用一句话概括。
-
-## Gate 5：强度匹配
-
-本研究设计、分析属性和外部证据共同限定措辞强度。
-
-## Gate 6：全局递进
-
-段落顺序服务于一条明确主线。后一段承接前一段未解决的问题、扩展意义或限定范围。
-
-## Gate 7：删除测试
-
-删除某篇文献后，中心判断和推理路径没有变化时，删除该文献。删除某句话后，段落更清晰且论证未受损时，删除该句。
-
-## Gate 8：最终可读性
-
-读者能够回答：本研究发现了什么、与现有证据关系如何、为什么可能一致或不同、结果意味着什么、结论适用于哪里。
+1. Every important study result has a traceable ledger entry.
+2. Every external statement used in prose maps to a sealed claim.
+3. Every comparison claim has an explicit comparability row.
+4. Every important result has an evidence tension map.
+5. Every paragraph has one approved contract and one central claim.
+6. Every citation changes, supports, contrasts, explains, or limits the argument.
+7. Every paragraph returns to the study result.
+8. Causal wording remains within the evidence ceiling.
+9. Semantic review passes for the current draft hash.
+10. Final compilation reruns the full gate and writes atomically.

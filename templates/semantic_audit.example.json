@@ -1,0 +1,8 @@
+{
+  "draft_hash": "a5bde01ecff1920e0693c2d8ad10db552cc893355bf0802ef3515a7c91f0e6e0",
+  "reviewer": "codex-semantic-audit",
+  "paragraphs": [
+    {"contract_id": "D1", "central_summary": "R1 aligns with comparable observational evidence and remains associational.", "one_central_claim": true, "linked_result_focus": true, "sentence_functions": [{"sentence": 1, "function": "study-result"}, {"sentence": 2, "function": "comparison"}, {"sentence": 3, "function": "interpretation-and-boundary"}], "citation_assessments": [{"claim_id": "REF-001-C1", "supported_statement": "Comparable evidence shows a similar association.", "advances_argument": true, "deletion_consequence": "The comparison loses its external support."}], "topic_drift": false, "return_to_study": true, "overclaiming": [], "revision_instructions": [], "status": "pass"}
+  ],
+  "overall_status": "pass"
+}

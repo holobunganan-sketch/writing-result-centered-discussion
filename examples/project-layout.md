@@ -1,17 +1,20 @@
-# 示例项目布局
+# Recommended Project Layout
 
 ```text
-study-project/
+project/
 ├── manuscript.docx
-├── results.md
-├── tables.xlsx
-├── protocol.pdf
+├── results/
+│   ├── results.docx
+│   ├── tables.xlsx
+│   └── figures/
+├── protocol/
 ├── references/
-│   ├── direct-comparator-1.pdf
-│   ├── direct-comparator-2.pdf
-│   ├── mechanism-study.pdf
-│   └── guideline.pdf
-└── .discussion-workspace/
+│   ├── primary-studies/
+│   ├── reviews/
+│   ├── guidelines/
+│   └── library.bib
+├── notes/
+└── old-drafts/
 ```
 
-索引脚本只读取源项目文件，不修改论文和参考文献。所有结构化中间产物保存在 `.discussion-workspace`。
+Add `old-drafts/**` to `excluded_globs`. Keep supplement files in the external pool when they contain unique evidence. Use the citation registry to connect evidence cards to BibTeX, RIS, or EndNote XML records.

@@ -1,0 +1,18 @@
+{
+  "rows": [
+    {
+      "result_id": "R1",
+      "claim_id": "REF-001-C1",
+      "dimensions": {
+        "population": {"study": "Adults receiving PEP", "external": "Adults receiving PEP", "rating": "high", "impact": "Directly comparable"},
+        "design": {"study": "Cross-sectional", "external": "Prospective observational", "rating": "medium", "impact": "Temporal structure differs"},
+        "intervention_or_exposure": {"study": "Structured counselling", "external": "Structured counselling", "rating": "high", "impact": "Directly comparable"},
+        "outcome": {"study": "Uptake", "external": "Uptake", "rating": "high", "impact": "Directly comparable"},
+        "follow_up": {"study": "Same visit", "external": "Same visit", "rating": "high", "impact": "Directly comparable"},
+        "setting": {"study": "Hospital clinics", "external": "Hospital clinics", "rating": "high", "impact": "Directly comparable"}
+      },
+      "overall": "high",
+      "interpretive_use": "support"
+    }
+  ]
+}

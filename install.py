@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 
 SKILL_NAME = "writing-result-centered-discussion"
-EXCLUDE = {"__pycache__", ".pytest_cache", ".discussion-workspace", ".git"}
+EXCLUDE = {"__pycache__", ".pytest_cache", ".discussion-workspace", ".git", ".worktrees", ".superpowers"}
 
 
 def default_base() -> Path:

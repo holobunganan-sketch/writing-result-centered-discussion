@@ -1,40 +1,25 @@
 {
   "id": "REF-001",
   "citation_key": "Support2024",
-  "rendered_citation": "(Support et al., 2024)",
+  "rendered_citation": "Support et al., 2024",
   "source_file": "references/supporting.txt",
-  "locator": "document, sentence 2",
-  "population": "Adults receiving post-exposure prophylaxis",
-  "design": "Multicentre prospective study",
-  "sample_size": "842",
-  "exposure_or_intervention": "Structured counselling addressing the early protection gap",
-  "outcome": "Treatment uptake",
-  "main_finding": "Structured counselling improved uptake, with a larger effect when the early protection gap was addressed.",
-  "effect_size": "not reported in fixture",
-  "limitations": [
-    "Non-random allocation"
-  ],
-  "linked_results": [
-    "R1"
-  ],
-  "evidence_roles": [
-    "support",
-    "difference-explanation"
-  ],
-  "relevance_reason": "It directly compares the same intervention mechanism and outcome as R1.",
-  "usable_claims": [
+  "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "publication": {"title": "Structured counselling and uptake", "authors": ["Support A"], "year": 2024, "doi": "10.1000/support.2024", "pmid": "", "status": "published"},
+  "claims": [
     {
-      "claim": "Prior prospective evidence links structured counselling with higher treatment uptake.",
-      "locator": "document, sentence 2"
-    },
-    {
-      "claim": "Explicitly addressing the early protection gap may strengthen the counselling effect.",
-      "locator": "document, sentence 3"
+      "id": "REF-001-C1",
+      "linked_results": ["R1"],
+      "role": "support",
+      "statement": "Structured counselling was associated with higher treatment uptake.",
+      "locator": "document",
+      "verified_excerpt": "Structured counselling was associated with higher treatment uptake.",
+      "excerpt_hash": "80e815e5de12c3e5985b22a0a9c14332a2de6300a1f1f6306e6e8a081f9d2efd",
+      "directness": "direct",
+      "certainty": "moderate",
+      "effect_size": "62% versus 38%",
+      "analysis_level": "primary",
+      "forbidden_inferences": ["Do not claim randomised causal efficacy"],
+      "comparability": {"population": "high", "design": "medium", "intervention_or_exposure": "high", "outcome": "high", "follow_up": "high", "setting": "high", "overall": "high", "impact_on_interpretation": "Close observational comparison."}
     }
-  ],
-  "forbidden_inferences": [
-    "The study proves that counselling caused higher uptake.",
-    "The reported effect applies to every clinical setting."
-  ],
-  "verified_full_text": true
+  ]
 }

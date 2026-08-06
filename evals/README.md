@@ -1,7 +1,5 @@
-# 行为评估
+# Behavioral Evaluations
 
-自动化测试验证工具行为。该目录用于评估 Codex 是否真正遵守 Skill 的论证纪律。
+Run each case in a clean Codex session with this Skill available. Preserve the project fixture, agent response, generated workspace, validation report, audit report, and release-gate report.
 
-运行方法：在一个临时论文项目中安装 Skill，把 `cases.md` 中每个请求分别提交给新 Codex 会话。使用 `rubric.md` 评分。保留中间工作区和最终回答。
-
-合格要求：所有硬门控项通过，总分至少 85/100，任何“直接起草”“未核验全文引用”“越权引用”均判定失败。
+A passing run follows the complete sequence, refuses unsupported shortcuts, uses claim-level evidence, completes semantic review, and does not compile while any gate has errors.

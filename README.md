@@ -1,125 +1,107 @@
-# 研究结果驱动的 Discussion 写作 Skill
+# Result-Centered Discussion Skill v2.0.0
 
-该 Skill 用于 Codex 在项目目录中读取研究结果和预先准备的参考文献，构建以本研究结果为主轴的 Discussion。它通过本地全文索引、结果账本、证据卡、段落论证契约和自动审计限制无意义信息拼接与无功能引用。
+用于 Codex 从本地论文项目中构建以研究结果为主线的 Discussion。系统将研究结果、外部文献证据、段落论证和最终文字分层管理，阻止无功能引用、文献罗列、来源幻觉、因果越界和绕过审计的最终输出。
 
 ## 安装
 
-解压 ZIP，进入解压后的目录，在 PowerShell 或终端运行：
+要求 Python 3.10 或更高版本。
 
 ```powershell
+python -m pip install -r requirements.txt
 python .\install.py --force
 ```
 
-默认安装到：
-
-```text
-%CODEX_HOME%\skills\writing-result-centered-discussion
-```
-
-未设置 `CODEX_HOME` 时使用：
+默认安装目录：
 
 ```text
 %USERPROFILE%\.codex\skills\writing-result-centered-discussion
 ```
 
-指定其他目录：
+完整 Office/PDF、混合检索和 OCR 能力：
 
 ```powershell
-python .\install.py --target "D:\CodexSkills" --force
+python -m pip install -r requirements-optional.txt
 ```
 
-安装后重启 Codex。自动发现未生效时，可把 `integration/AGENTS.md.snippet` 的内容加入项目 `AGENTS.md`，并修正 Skill 路径。
+OCR 还需要系统安装 Tesseract 和 Poppler。
 
-## 推荐项目结构
+## 推荐目录
 
 ```text
 project/
 ├── manuscript.docx
 ├── results/
 │   ├── results.docx
-│   ├── tables.xlsx
-│   └── figures/
+│   └── tables.xlsx
 ├── protocol/
 ├── references/
-│   ├── study-a.pdf
-│   ├── study-b.pdf
-│   └── review-c.pdf
+│   ├── paper-a.pdf
+│   ├── paper-b.pdf
+│   └── library.bib
 └── notes/
 ```
 
-无需严格采用该结构。索引器会递归扫描支持的文件类型，并忽略 `.git`、`node_modules` 和 `.discussion-workspace`。
+文件角色在 `.discussion-workspace/config.json` 中配置：
 
-## 使用
+- `study-evidence`：本研究 Results、表格、图和论文正文；
+- `external-evidence`：拟引用的外部文献；
+- `context-only`：方案、背景资料和笔记；
+- `excluded_globs`：旧稿、重复文件、临时文件和禁止使用的资料。
 
-在 Codex 中直接提出任务，例如：
-
-```text
-使用 writing-result-centered-discussion Skill，读取本项目的 Results 和 references 目录，先构建结果账本、证据矩阵、Discussion 主线和段落契约。通过验证后再起草 Discussion。
-```
-
-核心命令：
+## 核心命令
 
 ```bash
-python scripts/discussion.py --project <项目目录> init
-python scripts/discussion.py --project <项目目录> index
-python scripts/discussion.py --project <项目目录> search-result --result-id R1
-python scripts/discussion.py --project <项目目录> validate
-python scripts/discussion.py --project <项目目录> audit
-python scripts/discussion.py --project <项目目录> compile --citation-mode key
+python scripts/discussion.py --project <项目> init
+python scripts/discussion.py --project <项目> index
+python scripts/discussion.py --project <项目> search-result --result-id R1
+python scripts/discussion.py --project <项目> seal-card --id REF-001
+python scripts/discussion.py --project <项目> validate
+python scripts/discussion.py --project <项目> semantic-audit-init
+python scripts/discussion.py --project <项目> audit
+python scripts/discussion.py --project <项目> compile --citation-mode key
 ```
 
-## 本地索引能力
-
-支持直接读取：
-
-- Markdown、TXT、CSV、TSV、JSON、YAML、XML、HTML、TeX、BibTeX、RIS；
-- DOCX、PPTX、XLSX；
-- 可提取文本的 PDF。
-
-PDF 优先使用 `pypdf`，其次调用系统 `pdftotext`。两者均不可用或 PDF 为扫描件时，索引清单会把文件标记为不可读。此时需要安装 `pypdf`、安装 Poppler，或提供可搜索文本版 PDF。
-
-可选安装：
+其他命令：
 
 ```bash
-python -m pip install pypdf
+# 检查索引是否因文件变化而过期
+python scripts/discussion.py --project <项目> freshness
+
+# 生成 BibTeX、RIS、EndNote XML 映射
+python scripts/discussion.py --project <项目> citation-registry
+
+# 导出 claim 级证据矩阵和可比性矩阵
+python scripts/discussion.py --project <项目> export-matrix
+python scripts/discussion.py --project <项目> export-comparability
+
+# 将旧版工作区迁移到 v2；所有来源摘录仍需人工重新核验
+python scripts/discussion.py --project <项目> migrate-v1
+
+# 把已有 Discussion 拆成待审计段落
+python scripts/discussion.py --project <项目> revision-intake --draft old-discussion.docx
+
+# 将通过发布门的 Discussion 追加到原稿副本
+python scripts/discussion.py --project <项目> write-docx --manuscript manuscript.docx
 ```
 
-索引检索使用本地 BM25，不向外部服务上传项目文件。中文检索使用汉字单字和双字组合，英文检索使用词项。
+## v2 关键机制
 
-## 工作区
+- 正式 JSON Schema 校验，拒绝额外字段和不完整结构；
+- 外部证据池与本研究证据池强隔离；
+- BM25、字符级 TF-IDF、项目术语扩展和可比性重排；
+- DOI、PMID、文件哈希去重，优先保留正式发表版本；
+- claim 级来源哈希、原文定位、摘录和摘录哈希；
+- 研究可比性矩阵与证据冲突图；
+- 中英文因果措辞审计；
+- 结构化 Codex 语义审计和引用删除测试；
+- 增量索引；
+- 期刊 Discussion 总字数、段落字数和段落数限制；
+- 每次编译重新执行全部门控并原子写入最终文件。
 
-运行后在论文项目中生成：
-
-```text
-.discussion-workspace/
-├── project_inventory.json
-├── result_ledger.json
-├── index/
-├── candidate_searches/
-├── evidence_cards/
-├── evidence_matrix.csv
-├── argument_map.json
-├── paragraph_contracts/
-├── discussion_trace.md
-├── validation_report.json
-├── audit_report.json
-└── discussion_final.md
-```
-
-该目录保存全部推理结构和来源追踪。最终投稿文本位于 `discussion_final.md`。
-
-## 引用输出
-
-`compile` 支持三种模式：
-
-- `key`：把 `[REF-001]` 转换为 `[@CitationKey]`；
-- `rendered`：使用证据卡中的 `rendered_citation`；
-- `keep`：保留 `[REF-001]`，便于后续人工处理。
-
-## 自动化测试
+## 测试
 
 ```bash
-python scripts/discussion.py --project . selftest
+python scripts/check_package.py
+python -m unittest discover -s tests -v
+python -m compileall -q scripts
 ```
-
-测试覆盖本地索引排序、证据追溯验证、段落契约验证、越权引用审计和最终稿编译。`evals/` 中包含需要在 Codex 会话中运行的行为评估场景。

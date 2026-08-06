@@ -1,52 +1,15 @@
 {
   "id": "D1",
-  "linked_results": [
-    "R1"
-  ],
-  "discussion_question": "How should the higher uptake observed in this study be interpreted against prior evidence?",
-  "central_claim": "The observed association is consistent with prospective evidence and may reflect the value of counselling that addresses a concrete protection gap.",
+  "linked_results": ["R1"],
+  "discussion_question": "How does R1 compare with prior evidence and what does it mean?",
+  "central_claim": "The association is consistent with closely comparable observational evidence.",
   "claim_strength": "associational",
   "argument_steps": [
-    {
-      "order": 1,
-      "type": "study-result",
-      "content": "State R1 and identify the interpretation problem.",
-      "references": []
-    },
-    {
-      "order": 2,
-      "type": "comparison",
-      "content": "Compare R1 with the prospective counselling study.",
-      "references": [
-        "REF-001"
-      ]
-    },
-    {
-      "order": 3,
-      "type": "explanation",
-      "content": "Explain why directly addressing the early protection gap could strengthen uptake.",
-      "references": [
-        "REF-001"
-      ]
-    },
-    {
-      "order": 4,
-      "type": "boundary",
-      "content": "Limit causal interpretation because both studies have non-randomized evidence.",
-      "references": [
-        "REF-001"
-      ]
-    },
-    {
-      "order": 5,
-      "type": "return-to-study",
-      "content": "State what this comparison adds to the interpretation of R1.",
-      "references": []
-    }
+    {"order": 1, "type": "study-result", "content": "State R1.", "claims": []},
+    {"order": 2, "type": "comparison", "content": "Compare the direction and magnitude.", "claims": ["REF-001-C1"]},
+    {"order": 3, "type": "interpretation-and-boundary", "content": "Return to R1 and retain observational limits.", "claims": ["REF-001-C1"]}
   ],
-  "allowed_references": [
-    "REF-001"
-  ],
-  "closing_message": "R1 supports targeted counselling as a practical strategy in similar settings, while causal effectiveness requires stronger designs.",
+  "allowed_claims": ["REF-001-C1"],
+  "closing_message": "The result supports counselling as a promising implementation strategy while retaining observational limits.",
   "status": "approved"
 }

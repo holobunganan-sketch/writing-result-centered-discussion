@@ -3,9 +3,9 @@
   "linked_results": [],
   "discussion_question": "",
   "central_claim": "",
-  "claim_strength": "",
+  "claim_strength": "descriptive",
   "argument_steps": [],
-  "allowed_references": [],
+  "allowed_claims": [],
   "closing_message": "",
   "status": "draft"
 }
