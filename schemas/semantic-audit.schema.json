@@ -1,27 +1,59 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://local.wrcd/v2/semantic-audit.schema.json",
-  "type": "object", "additionalProperties": false, "required": ["draft_hash", "paragraphs"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["draft_hash", "reviewer", "paragraphs", "overall_status"],
   "properties": {
     "draft_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
-    "paragraphs": {"type": "array", "items": {
-      "type": "object", "additionalProperties": false,
-      "required": ["contract_id", "one_sentence_summary", "single_central_claim", "result_focus", "sentence_functions", "claim_support", "citation_deletion_tests", "topic_drift", "strength_within_evidence", "returns_to_study", "issues", "revision_instruction", "status"],
-      "properties": {
-        "contract_id": {"type": "string", "pattern": "^D[0-9]+$"},
-        "one_sentence_summary": {"type": "string", "minLength": 1},
-        "single_central_claim": {"type": "boolean"},
-        "result_focus": {"type": "boolean"},
-        "sentence_functions": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["sentence", "function"], "properties": {"sentence": {"type": "string"}, "function": {"enum": ["study-result", "question", "comparison", "contrast", "difference-explanation", "mechanism", "boundary", "implication", "return-to-study", "other"]}}},
-        "claim_support": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["claim_id", "supported_sentence", "supports", "reason"], "properties": {"claim_id": {"type": "string", "pattern": "^REF-[0-9]{3,}-C[0-9]+$"}, "supported_sentence": {"type": "string"}, "supports": {"type": "boolean"}, "reason": {"type": "string"}}},
-        "citation_deletion_tests": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["claim_id", "loss_if_removed", "advances_argument"], "properties": {"claim_id": {"type": "string"}, "loss_if_removed": {"type": "string"}, "advances_argument": {"type": "boolean"}}},
-        "topic_drift": {"type": "boolean"},
-        "strength_within_evidence": {"type": "boolean"},
-        "returns_to_study": {"type": "boolean"},
-        "issues": {"type": "array", "items": {"type": "string"}},
-        "revision_instruction": {"type": "string"},
-        "status": {"enum": ["pass", "revise"]}
+    "reviewer": {"type": "string", "minLength": 1},
+    "paragraphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["contract_id", "central_summary", "one_central_claim", "linked_result_focus", "sentence_functions", "citation_assessments", "topic_drift", "return_to_study", "overclaiming", "revision_instructions", "status"],
+        "properties": {
+          "contract_id": {"type": "string", "pattern": "^D[0-9]+$"},
+          "central_summary": {"type": "string", "minLength": 1},
+          "one_central_claim": {"type": "boolean"},
+          "linked_result_focus": {"type": "boolean"},
+          "sentence_functions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["sentence", "function"],
+              "properties": {
+                "sentence": {"type": "integer", "minimum": 1},
+                "function": {"type": "string", "minLength": 1}
+              }
+            }
+          },
+          "citation_assessments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["claim_id", "supported_statement", "advances_argument", "deletion_consequence"],
+              "properties": {
+                "claim_id": {"type": "string", "minLength": 1},
+                "supported_statement": {"type": "string", "minLength": 1},
+                "advances_argument": {"type": "boolean"},
+                "deletion_consequence": {"type": "string", "minLength": 1}
+              }
+            }
+          },
+          "topic_drift": {"type": "boolean"},
+          "return_to_study": {"type": "boolean"},
+          "overclaiming": {"type": "array", "items": {"type": "string"}},
+          "revision_instructions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "status": {"enum": ["pass", "revise", "pending"]}
+        }
       }
-    }}
+    },
+    "overall_status": {"enum": ["pass", "revise", "pending"]}
   }
 }
