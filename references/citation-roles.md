@@ -1,15 +1,13 @@
-# 引用功能分类
+# Claim Roles
 
-| 角色 | 用途 | 入选条件 |
-|---|---|---|
-| `benchmark` | 提供发生率、效应量或临床水平参照 | 人群、结局和时间窗具有可比性 |
-| `support` | 支持本研究发现或解释 | 研究结果直接对应当前判断 |
-| `contrast` | 提供不同或相反结果 | 差异明确，能够引出分析 |
-| `difference-explanation` | 解释研究间异质性 | 文献直接涉及人群、设计、测量、干预或环境差异 |
-| `mechanism` | 支持生物学、行为学或系统机制 | 机制证据与当前结果存在可说明的连接 |
-| `methodology` | 解释测量、设计或分析造成的差异 | 方法差异影响结果可比性 |
-| `implication` | 支持临床、公共卫生或研究意义 | 证据能够支撑具体行动或判断 |
-| `boundary` | 限定适用人群、场景或结论强度 | 文献揭示外推边界或反例 |
-| `limitation` | 解释偏倚、不确定性或未测混杂 | 与本研究的具体限制直接相关 |
+- `benchmark`: supplies a directly comparable rate, effect, or clinical reference.
+- `support`: supports the direction or interpretation of the current result.
+- `contrast`: supplies a credible differing result that requires analysis.
+- `difference-explanation`: supports a concrete reason for study differences.
+- `mechanism`: supports a biological, behavioral, or implementation pathway.
+- `methodology`: explains measurement, design, or analytical differences.
+- `implication`: supports a defined clinical, policy, or research consequence.
+- `boundary`: limits applicability or inference.
+- `limitation`: supports interpretation of a study limitation.
 
-一篇文献可以承担多个角色。每个角色都需要单独写明相关性。主题相关性不足以构成引用理由。
+Assign the role to a claim unit. One paper can contain claims with different roles and evidence strengths.

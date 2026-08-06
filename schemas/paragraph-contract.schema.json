@@ -1,49 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/writing-result-centered-discussion/paragraph-contract.schema.json",
-  "title": "Paragraph Contract",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "id", "linked_results", "discussion_question", "central_claim", "claim_strength",
-    "argument_steps", "allowed_references", "closing_message", "status"
-  ],
+  "$id": "https://local.wrcd/v2/paragraph-contract.schema.json",
+  "title": "Paragraph Contract v2",
+  "type": "object", "additionalProperties": false,
+  "required": ["id", "linked_results", "discussion_question", "central_claim", "claim_strength", "argument_steps", "allowed_claims", "closing_message", "status"],
   "properties": {
     "id": {"type": "string", "pattern": "^D[0-9]+$"},
-    "linked_results": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {"type": "string", "pattern": "^R[0-9]+$"}
-    },
+    "linked_results": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^R[0-9]+$"}},
     "discussion_question": {"type": "string", "minLength": 1},
     "central_claim": {"type": "string", "minLength": 1},
-    "claim_strength": {"type": "string", "minLength": 1},
+    "claim_strength": {"enum": ["causal", "associational", "descriptive"]},
     "argument_steps": {
-      "type": "array",
-      "minItems": 2,
+      "type": "array", "minItems": 2,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["order", "type", "content", "references"],
+        "type": "object", "additionalProperties": false, "required": ["order", "type", "content", "claims"],
         "properties": {
           "order": {"type": "integer", "minimum": 1},
-          "type": {"type": "string", "minLength": 1},
+          "type": {"enum": ["study-result", "comparison", "contrast", "difference-explanation", "mechanism", "boundary", "implication", "interpretation", "interpretation-and-boundary"]},
           "content": {"type": "string", "minLength": 1},
-          "references": {
-            "type": "array",
-            "uniqueItems": true,
-            "items": {"type": "string", "pattern": "^REF-[0-9]{3,}$"}
-          }
+          "claims": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^REF-[0-9]{3,}-C[0-9]+$"}}
         }
       }
     },
-    "allowed_references": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {"type": "string", "pattern": "^REF-[0-9]{3,}$"}
-    },
+    "allowed_claims": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^REF-[0-9]{3,}-C[0-9]+$"}},
     "closing_message": {"type": "string", "minLength": 1},
-    "status": {"type": "string", "enum": ["draft", "approved"]}
+    "status": {"enum": ["draft", "approved"]}
   }
 }

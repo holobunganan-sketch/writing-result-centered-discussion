@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.wrcd/v2/evidence-tension-map.schema.json",
+  "type": "object", "additionalProperties": false, "required": ["results"],
+  "properties": {"results": {"type": "array", "items": {
+    "type": "object", "additionalProperties": false,
+    "required": ["result_id", "supporting_claims", "contrasting_claims", "partially_consistent_claims", "noncomparable_claims", "difference_dimensions", "best_supported_interpretation", "unresolved_questions"],
+    "properties": {
+      "result_id": {"type": "string", "pattern": "^R[0-9]+$"},
+      "supporting_claims": {"type": "array", "items": {"type": "string"}},
+      "contrasting_claims": {"type": "array", "items": {"type": "string"}},
+      "partially_consistent_claims": {"type": "array", "items": {"type": "string"}},
+      "noncomparable_claims": {"type": "array", "items": {"type": "string"}},
+      "difference_dimensions": {"type": "array", "items": {"type": "string"}},
+      "best_supported_interpretation": {"type": "string", "minLength": 1},
+      "unresolved_questions": {"type": "array", "items": {"type": "string"}}
+    }
+  }}}
+}

@@ -1,14 +1,30 @@
-# 无意义罗列与结果驱动写法
+# Bad and Repaired Discussion Logic
 
-## 问题版本
+## Bad paragraph
 
-Many studies have investigated counselling. Smith et al. reported improved knowledge. Lee et al. studied vaccine attitudes. Chen et al. found regional differences. Another study discussed cost. Several guidelines recommend education. These findings are important for clinical practice.
+Our study found higher uptake. Several studies have investigated counselling. Study A described patient knowledge. Study B examined cost. Study C reported attitudes. Study D discussed health literacy. These studies show that counselling is important.
 
-该段缺少本研究结果、中心判断、可比维度和文献功能。引用顺序由文献本身驱动，结尾没有形成对本研究的解释。
+Problems:
 
-## 修复版本
+- the paragraph does not state the interpretive question;
+- sources are related only by topic;
+- evidence roles are absent;
+- study comparability is unknown;
+- the final sentence adds no specific interpretation of the current result.
 
+## Repaired argument contract
+
+- Linked result: `R1`
+- Central claim: the uptake association is consistent with closely comparable implementation evidence.
+- Step 1: state the magnitude and uncertainty of `R1`.
+- Step 2: use `REF-001-C1` as a direct comparison.
+- Step 3: use the comparability matrix to explain which dimensions support the comparison.
+- Step 4: state the observational boundary.
+- Closing message: clarify what the comparison adds to interpretation of `R1`.
+
+## Repaired traceable paragraph
+
+```markdown
 <!-- D:D1 R:R1 -->
-Our study found that structured counselling was associated with higher treatment uptake. A prospective multicentre study reported the same direction when counselling explicitly addressed the early protection gap [REF-001], whereas generic health education produced little change in an urban survey that did not address cost or travel barriers [REF-002]. This contrast indicates that intervention specificity and the barriers present in the target population may explain part of the observed heterogeneity. The evidence remains observational, which limits causal attribution. The present result therefore supports targeted barrier-focused counselling in comparable settings and identifies intervention content as a priority for controlled evaluation.
-
-该段由 R1 启动。REF-001 提供支持和机制线索，REF-002 提供对照并帮助解释差异。结尾明确了本研究结果的适用意义和证据边界。
+Our study found a higher treatment-uptake association after structured counselling. A closely comparable observational study reported the same direction under a similar population, setting, intervention, outcome definition, and assessment window [REF-001-C1]. The convergence strengthens the interpretation that counselling may address an implementation barrier in this clinical context, while the observational designs leave causal effectiveness unresolved. This comparison therefore supports the relevance of the current result to similar hospital-based populations and defines the evidence needed for a controlled evaluation.
+```

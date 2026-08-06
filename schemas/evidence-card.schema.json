@@ -1,62 +1,60 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/writing-result-centered-discussion/evidence-card.schema.json",
-  "title": "Evidence Card",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "id", "citation_key", "rendered_citation", "source_file", "locator", "population",
-    "design", "sample_size", "exposure_or_intervention", "outcome", "main_finding",
-    "effect_size", "limitations", "linked_results", "evidence_roles", "relevance_reason",
-    "usable_claims", "forbidden_inferences", "verified_full_text"
-  ],
+  "$id": "https://local.wrcd/v2/evidence-card.schema.json",
+  "title": "Claim-level Evidence Card v2",
+  "type": "object", "additionalProperties": false,
+  "required": ["id", "citation_key", "rendered_citation", "source_file", "source_hash", "publication", "claims"],
   "properties": {
     "id": {"type": "string", "pattern": "^REF-[0-9]{3,}$"},
     "citation_key": {"type": "string", "minLength": 1},
     "rendered_citation": {"type": "string"},
     "source_file": {"type": "string", "minLength": 1},
-    "locator": {"type": "string", "minLength": 1},
-    "population": {"type": "string", "minLength": 1},
-    "design": {"type": "string", "minLength": 1},
-    "sample_size": {"type": "string", "minLength": 1},
-    "exposure_or_intervention": {"type": "string", "minLength": 1},
-    "outcome": {"type": "string", "minLength": 1},
-    "main_finding": {"type": "string", "minLength": 1},
-    "effect_size": {"type": "string", "minLength": 1},
-    "limitations": {"type": "array", "items": {"type": "string"}},
-    "linked_results": {
-      "type": "array",
-      "minItems": 1,
-      "items": {"type": "string", "pattern": "^R[0-9]+$"},
-      "uniqueItems": true
-    },
-    "evidence_roles": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {
-        "type": "string",
-        "enum": [
-          "benchmark", "support", "contrast", "difference-explanation", "mechanism",
-          "methodology", "implication", "boundary", "limitation"
-        ]
+    "source_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "publication": {
+      "type": "object", "additionalProperties": false,
+      "required": ["title", "authors", "year", "doi", "pmid", "status"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "authors": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "year": {"type": ["integer", "string"]},
+        "doi": {"type": "string"}, "pmid": {"type": "string"},
+        "status": {"enum": ["published", "preprint", "guideline", "review", "other"]}
       }
     },
-    "relevance_reason": {"type": "string", "minLength": 1},
-    "usable_claims": {
-      "type": "array",
-      "minItems": 1,
+    "claims": {
+      "type": "array", "minItems": 1,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["claim", "locator"],
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "linked_results", "role", "statement", "locator", "verified_excerpt", "excerpt_hash", "directness", "certainty", "effect_size", "analysis_level", "forbidden_inferences", "comparability"],
         "properties": {
-          "claim": {"type": "string", "minLength": 1},
-          "locator": {"type": "string", "minLength": 1}
+          "id": {"type": "string", "pattern": "^REF-[0-9]{3,}-C[0-9]+$"},
+          "linked_results": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^R[0-9]+$"}},
+          "role": {"enum": ["benchmark", "support", "contrast", "difference-explanation", "mechanism", "methodology", "implication", "boundary", "limitation"]},
+          "statement": {"type": "string", "minLength": 1},
+          "locator": {"type": "string", "minLength": 1},
+          "verified_excerpt": {"type": "string", "minLength": 1},
+          "excerpt_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "directness": {"enum": ["direct", "indirect", "contextual"]},
+          "certainty": {"enum": ["high", "moderate", "low", "very-low", "not-assessed"]},
+          "effect_size": {"type": "string", "minLength": 1},
+          "analysis_level": {"enum": ["primary", "secondary", "subgroup", "exploratory", "mechanistic", "not-applicable"]},
+          "forbidden_inferences": {"type": "array", "items": {"type": "string"}},
+          "comparability": {
+            "type": "object", "additionalProperties": false,
+            "required": ["population", "design", "intervention_or_exposure", "outcome", "follow_up", "setting", "overall", "impact_on_interpretation"],
+            "properties": {
+              "population": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "design": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "intervention_or_exposure": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "outcome": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "follow_up": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "setting": {"enum": ["high", "medium", "low", "not-applicable"]},
+              "overall": {"enum": ["high", "medium", "low", "not-comparable"]},
+              "impact_on_interpretation": {"type": "string", "minLength": 1}
+            }
+          }
         }
       }
-    },
-    "forbidden_inferences": {"type": "array", "items": {"type": "string"}},
-    "verified_full_text": {"const": true}
+    }
   }
 }

@@ -1,24 +1,12 @@
-# Result-Centered Discussion Skill Design
+# v2 Design
 
-## Goal
+The Skill uses six separated evidence layers:
 
-Create a Codex Skill that drafts scientific Discussion sections from project-local study results and literature while preventing topic-based information accumulation and functionless citations.
+1. **Source layer** — immutable project files classified into study, external, context, and excluded pools.
+2. **Result layer** — verified findings from the current study with causal ceilings.
+3. **Claim layer** — externally sourced claims sealed to a source hash, locator, excerpt, and excerpt hash.
+4. **Comparison layer** — structured comparability rows and evidence tension maps.
+5. **Argument layer** — paragraph contracts with one central claim and claim-level authorization.
+6. **Delivery layer** — traceable draft, deterministic audit, Codex semantic audit, fresh release gate, Markdown output, and optional DOCX copy.
 
-## Architecture
-
-The Skill uses progressive disclosure. `SKILL.md` defines gates and routing. Workflow and reference files contain detailed judgment rules. A standard-library Python toolkit performs local extraction, BM25 retrieval, schema-oriented validation, trace auditing, and final compilation.
-
-## Data flow
-
-Project files → local text index → result ledger → result-specific searches → verified evidence cards → argument map → approved paragraph contracts → traceable draft → audit → clean Discussion.
-
-## Reliability controls
-
-- Full-text verification and source locators;
-- explicit evidence roles;
-- result-reference-contract traceability;
-- reference allowlists per paragraph;
-- causal ceiling fields;
-- validation and audit exit codes;
-- no external file upload by the bundled scripts;
-- automated regression tests and behavioral evaluation cases.
+Every layer has a machine-readable artifact and an explicit validation boundary. Changes in an earlier layer invalidate dependent later layers.

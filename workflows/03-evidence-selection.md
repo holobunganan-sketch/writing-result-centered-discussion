@@ -1,39 +1,14 @@
-# 03 文献检索与证据卡
+# 03 Evidence Selection
 
-## 检索顺序
+Search one result at a time. Candidate ranking is not evidence verification.
 
-1. 以单项结果为单位运行 `search-result`。
-2. 先寻找直接比较研究：相近人群、暴露或干预、结局、时间窗和研究环境。
-3. 再寻找解释差异、支持机制、限定外推或说明意义的研究。
-4. 逐篇打开全文，核对相关段落和数据。
-5. 只为能够推进论证的文献创建证据卡。
+For each selected source:
 
-## 证据卡的最低要求
+1. Read the full local text and the relevant table, figure, or result section.
+2. Create a card and one or more claim units.
+3. Give every claim a unique ID such as `REF-004-C2`.
+4. Record its linked result, argumentative role, precise locator, exact supporting excerpt, effect size, analysis level, directness, certainty, and forbidden inferences.
+5. Assess population, design, intervention or exposure, outcome, follow-up, setting, and overall comparability.
+6. Run `seal-card` to calculate source and excerpt hashes and verify the excerpt at the locator.
 
-- 精确来源文件和定位；
-- 人群、设计、样本量、暴露或干预、结局；
-- 与当前结果直接相关的发现；
-- 效应量或明确记录未报告；
-- 局限性；
-- 绑定的结果编号；
-- 明确的证据角色；
-- 一句具体的相关性理由；
-- 可直接使用的 claim 与各自定位；
-- 禁止推导的结论；
-- `verified_full_text: true`。
-
-## 入选测试
-
-每篇文献回答以下问题：
-
-1. 它对应哪一项本研究结果？
-2. 它承担什么论证功能？
-3. 它推进哪一步判断？
-4. 它支持的原句是什么？
-5. 删除后，当前论证会失去什么？
-
-第 1 至第 4 项无法回答时不入选。第 5 项回答为“没有变化”时删除。
-
-## 数量控制
-
-文献数量由论证需要决定。一个段落通常保留最直接的比较研究、必要的解释证据和一项边界证据。高度重复的研究合并陈述，选择最具可比性或证据等级更高的来源。
+A source may support several claims. Each claim needs independent verification and authorization.
